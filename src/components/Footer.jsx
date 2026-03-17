@@ -1,4 +1,6 @@
 import { Facebook, Twitter, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
+import Logo from "../assets/shopee.svg";
 
 export default function Footer() {
   return (
@@ -22,22 +24,36 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-blue-100/60 text-sm leading-relaxed max-w-xs">
-              Providing premium, sustainable, and custom packaging solutions
-              globally since 1998. Your brand, our priority.
+              Providing sustainable, and custom packaging solutions globally
+              since 1983. Your brand, our priority.
             </p>
-            <div className="flex gap-5">
-              <Facebook
-                size={18}
-                className="hover:text-orange-400 cursor-pointer transition-colors"
-              />
-              <Twitter
-                size={18}
-                className="hover:text-orange-400 cursor-pointer transition-colors"
-              />
-              <Linkedin
-                size={18}
-                className="hover:text-orange-400 cursor-pointer transition-colors"
-              />
+            <div className="flex gap-6 items-center">
+              {/* Facebook Icon - Increased size to match */}
+              <a
+                href="#"
+                className="hover:text-orange-400 transition-all hover:scale-110"
+              >
+                <Facebook
+                  size={28}
+                  className="cursor-pointer transition-colors"
+                />
+              </a>
+
+              {/* Custom Shopee Icon - Made Bigger */}
+              <a
+                href="https://shopee.ph/your-shop-url"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-transform hover:scale-110"
+                title="Shopee"
+              >
+                <img
+                  src={Logo}
+                  alt="Shopee"
+                  /* Increased from w-5 h-5 to w-8 h-8 (32px) */
+                  className="w-8 h-8 object-contain transition-all duration-300"
+                />
+              </a>
             </div>
           </div>
 
@@ -108,18 +124,18 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-orange-400 shrink-0" />
                 <span>
-                  123 Industrial Park Way,
+                  1F. De Zafra St. Barangay Maysan,
                   <br />
-                  Metro City, NY 10001
+                  Valenzuela City
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} className="text-orange-400 shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <span>(02) 8277-0030 / 8277-0036</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-orange-400 shrink-0" />
-                <span>info@kimwin.com</span>
+                <span>kimwinsales@gmail.com</span>
               </li>
             </ul>
           </div>

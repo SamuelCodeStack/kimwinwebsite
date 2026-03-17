@@ -1,22 +1,38 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Gallery from "./components/Gallery"; // This is the middle section
+import Services from "./components/Services";
+import Gallery from "./components/Gallery";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
-      <Navbar />
+    <Router>
+      <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
+        <Navbar />
 
-      {/* 1. Top Section */}
-      <Hero />
+        <Routes>
+          {/* Home Route: Displays Hero + some previews */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <Services />
+              </>
+            }
+          />
 
-      {/* 2. Middle Section (Crucial to prevent overlap) */}
-      <Gallery />
+          {/* Individual Pages */}
+          <Route path="/services" element={<Services />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
 
-      {/* 3. Bottom Section */}
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
