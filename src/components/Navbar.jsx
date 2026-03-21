@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom"; // Using NavLink for active states
+import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+
+// 1. Import your custom logo image
+import KCLogo from "../assets/kc-logo.png"; // Make sure to save image_0.png as kc-logo.png in src/assets/
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Centralized links for easy management
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
@@ -17,15 +19,19 @@ export default function Navbar() {
   return (
     <nav className="bg-white dark:bg-slate-900 shadow-sm sticky top-0 z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between h-20">
-        {/* Logo - Wrap in Link to always go Home */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-blue-900 rounded-lg flex items-center justify-center text-white font-bold italic group-hover:bg-orange-500 transition-colors">
-            K
-          </div>
+        {/* Logo Section - Wrap in Link to go Home */}
+        <Link to="/" className="flex items-center gap-3 group">
+          {/* 2. Display the custom KC Logo */}
+          <img
+            src={KCLogo}
+            alt="Kimwin Corp Logo"
+            className="w-16 h-auto object-contain dark:brightness-0 dark:invert transition-transform group-hover:scale-105"
+          />
           <span className="font-bold text-lg text-blue-900 dark:text-white leading-tight">
             KIMWIN
             <br />
-            <span className="text-[10px] uppercase tracking-widest text-orange-500">
+            {/* 3. Updated subheading to use the logo's deep blue/sky blue scheme */}
+            <span className="text-[10px] uppercase tracking-widest text-red-500">
               Corporation
             </span>
           </span>
@@ -38,9 +44,9 @@ export default function Navbar() {
               key={link.name}
               to={link.path}
               className={({ isActive }) =>
-                `text-sm font-bold uppercase tracking-wider transition-colors hover:text-orange-500 ${
+                `text-sm font-bold uppercase tracking-wider transition-colors hover:text-blue-500 ${
                   isActive
-                    ? "text-orange-500 border-b-2 border-orange-500 pb-1"
+                    ? "text-blue-600 border-b-2 border-blue-400 pb-1"
                     : "text-gray-600 dark:text-gray-300"
                 }`
               }
@@ -53,12 +59,6 @@ export default function Navbar() {
         {/* Right Side Actions */}
         <div className="flex items-center gap-4">
           <ThemeToggle />
-
-          <Link to="/contact">
-            <button className="hidden lg:block bg-blue-900 dark:bg-orange-500 text-white dark:text-slate-900 px-6 py-2.5 rounded text-xs font-black uppercase transition-all hover:opacity-90 active:scale-95">
-              Request a Quote
-            </button>
-          </Link>
 
           {/* Mobile Toggle Button */}
           <button
@@ -81,7 +81,7 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `text-lg font-bold uppercase tracking-widest ${
                   isActive
-                    ? "text-orange-500"
+                    ? "text-blue-500"
                     : "text-gray-600 dark:text-gray-300"
                 }`
               }
@@ -89,11 +89,6 @@ export default function Navbar() {
               {link.name}
             </NavLink>
           ))}
-          <Link to="/contact" onClick={() => setIsOpen(false)}>
-            <button className="bg-blue-900 dark:bg-orange-500 text-white dark:text-slate-900 w-full py-4 rounded-xl font-black uppercase tracking-widest mt-4">
-              Request a Quote
-            </button>
-          </Link>
         </div>
       )}
     </nav>

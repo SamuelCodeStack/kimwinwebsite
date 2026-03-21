@@ -1,13 +1,10 @@
 import { motion } from "framer-motion";
-import { Package, Leaf, Printer, Factory } from "lucide-react";
+import WarehouseImg from "../assets/Kimwinwarehouse.png";
 
 export default function Hero() {
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
   };
 
   const itemVariants = {
@@ -17,64 +14,60 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden">
-      <div className="relative min-h-[550px] lg:min-h-[650px] bg-slate-900 flex items-center">
+      <div className="relative min-h-[550px] lg:min-h-[750px] bg-slate-900 flex items-center">
         <motion.img
           initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.3 }}
+          animate={{ scale: 1, opacity: 0.4 }}
           transition={{ duration: 1.5 }}
-          src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000"
+          src={WarehouseImg}
           className="absolute inset-0 w-full h-full object-cover"
+          alt="Kimwin Warehouse"
         />
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 pt-20 pb-32 lg:pb-40"
+          className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10"
         >
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl font-black text-white uppercase leading-tight max-w-2xl"
+            className="text-5xl md:text-7xl font-black text-white uppercase leading-tight max-w-3xl"
           >
-            Custom Packaging <span className="text-orange-400">Solutions</span>
+            Custom Packaging <span className="text-blue-400">Solutions</span>
           </motion.h1>
+
           <motion.p
             variants={itemVariants}
-            className="text-gray-300 text-lg mt-6 max-w-lg"
+            className="text-gray-300 text-xl mt-6 max-w-xl leading-relaxed"
           >
-            Premium, tailored packaging designed for impact and sustainability.
+            Premium, tailored packaging designed for impact and durability.
           </motion.p>
-          <motion.button
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-8 bg-orange-500 text-white px-8 py-4 rounded font-black uppercase"
-          >
-            Start Your Project
-          </motion.button>
-        </motion.div>
-      </div>
 
-      {/* Cards with Hover Animation */}
-      <div className="max-w-7xl mx-auto px-6 md:px-10 -mt-20 relative z-20 pb-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border-b-4 border-orange-400"
+          <motion.div
+            variants={itemVariants}
+            className="mt-10 flex flex-wrap gap-4"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-blue-600 text-white px-10 py-5 rounded-lg font-black uppercase tracking-wider shadow-lg shadow-blue-500/20"
             >
-              <Package className="text-orange-500 mb-4" />
-              <h3 className="font-bold text-blue-900 dark:text-white">
-                Custom Design
-              </h3>
-            </motion.div>
-          ))}
-        </div>
+              Start Your Project
+            </motion.button>
+
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "rgba(255,255,255,0.1)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="border-2 border-white/30 text-white px-10 py-5 rounded-lg font-black uppercase tracking-wider backdrop-blur-sm"
+            >
+              View Catalog
+            </motion.button>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

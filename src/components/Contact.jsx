@@ -42,7 +42,8 @@ export default function Contact() {
           <h2 className="text-3xl md:text-4xl font-black text-blue-950 dark:text-white uppercase tracking-tight">
             Contact Our Experts
           </h2>
-          <div className="w-24 h-1.5 bg-orange-400 mx-auto mt-4 rounded-full"></div>
+          {/* Change: Orange bar to Blue */}
+          <div className="w-24 h-1.5 bg-blue-600 mx-auto mt-4 rounded-full"></div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
@@ -72,14 +73,15 @@ export default function Contact() {
             viewport={{ once: true }}
             className="flex flex-col gap-8"
           >
-            {/* Contact Details Grid (Adjusted for 3 cards) */}
+            {/* Contact Details Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Card 1: Full width on mobile, half on tablet */}
+              {/* Card 1 */}
               <motion.div
                 variants={itemVariants}
-                className="bg-gray-50 dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 hover:border-orange-400 transition-colors group sm:col-span-2 lg:col-span-1"
+                className="bg-gray-50 dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 hover:border-blue-500 transition-colors group sm:col-span-2 lg:col-span-1"
               >
-                <MapPin className="text-orange-500 mb-3" size={24} />
+                {/* Change: Icon to Red */}
+                <MapPin className="text-red-600 mb-3" size={24} />
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
                   Office Address
                 </p>
@@ -91,9 +93,10 @@ export default function Contact() {
               {/* Card 2 */}
               <motion.div
                 variants={itemVariants}
-                className="bg-gray-50 dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 hover:border-orange-400 transition-colors group"
+                className="bg-gray-50 dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 hover:border-blue-500 transition-colors group"
               >
-                <Phone className="text-orange-500 mb-3" size={24} />
+                {/* Change: Icon to Red */}
+                <Phone className="text-red-600 mb-3" size={24} />
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
                   Support Line
                 </p>
@@ -105,9 +108,10 @@ export default function Contact() {
               {/* Card 3 */}
               <motion.div
                 variants={itemVariants}
-                className="bg-gray-50 dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 hover:border-orange-400 transition-colors group"
+                className="bg-gray-50 dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 hover:border-blue-500 transition-colors group"
               >
-                <Mail className="text-orange-500 mb-3" size={24} />
+                {/* Change: Icon to Red */}
+                <Mail className="text-red-600 mb-3" size={24} />
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
                   Email Us
                 </p>
@@ -127,23 +131,23 @@ export default function Contact() {
                   <input
                     type="text"
                     placeholder="Full Name"
-                    className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 dark:text-white outline-none focus:ring-2 focus:ring-orange-400 transition-all"
+                    className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 dark:text-white outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   />
                   <input
                     type="email"
                     placeholder="Email Address"
-                    className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 dark:text-white outline-none focus:ring-2 focus:ring-orange-400 transition-all"
+                    className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 dark:text-white outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                   />
                 </div>
                 <textarea
                   rows="4"
                   placeholder="Tell us about your project..."
-                  className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 dark:text-white outline-none focus:ring-2 focus:ring-orange-400 transition-all resize-none"
+                  className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 dark:text-white outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"
                 ></textarea>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-blue-900 dark:bg-orange-500 text-white dark:text-slate-950 font-black uppercase py-5 rounded-xl flex items-center justify-center gap-3 hover:opacity-90 transition-all shadow-lg"
+                  className="w-full bg-blue-900 dark:bg-blue-600 text-white font-black uppercase py-5 rounded-xl flex items-center justify-center gap-3 hover:opacity-90 transition-all shadow-lg"
                 >
                   Send Message <Send size={18} />
                 </motion.button>

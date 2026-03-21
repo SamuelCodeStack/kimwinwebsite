@@ -19,7 +19,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setDarkMode(!darkMode)}
-      className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-blue-900 dark:text-orange-400 transition-all"
+      className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400 transition-all"
     >
       {darkMode ? <Sun size={20} /> : <Moon size={20} />}
     </button>
