@@ -5,15 +5,21 @@ import Services from "./components/Services";
 import Gallery from "./components/Gallery";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import AboutUs from "./components/AboutUs";
+import ScrollToTop from "./components/ScrollToTop";
+import BackToTop from "./components/BackToTop";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
     <Router>
+      {/* Reset scroll position on every navigation */}
+      <ScrollToTop />
+
       <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
         <Navbar />
 
         <Routes>
-          {/* Home Route: Displays Hero + some previews */}
           <Route
             path="/"
             element={
@@ -23,14 +29,17 @@ function App() {
               </>
             }
           />
-
-          {/* Individual Pages */}
+          <Route path="/about" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         <Footer />
+
+        {/* Floating action button */}
+        <BackToTop />
       </div>
     </Router>
   );

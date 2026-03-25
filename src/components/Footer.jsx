@@ -1,8 +1,7 @@
 import { Facebook, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-// 1. Import the custom branding assets
 import KCLogo from "../assets/kc-logo.png";
-import ShopeeBrandedLogo from "../assets/shopee.svg"; // Save the Shopee image as this file
+import ShopeeBrandedLogo from "../assets/shopee.svg";
 
 export default function Footer() {
   return (
@@ -32,15 +31,12 @@ export default function Footer() {
             </p>
 
             <div className="flex gap-6 items-center">
-              {/* Facebook Icon - Keeps Blue hover for branding distinction */}
               <a
                 href="#"
                 className="text-white hover:text-blue-400 transition-all hover:scale-110"
               >
                 <Facebook size={28} />
               </a>
-
-              {/* 2. Branded Shopee Store Link */}
               <a
                 href="https://shopee.ph/your-shop-url"
                 target="_blank"
@@ -97,7 +93,10 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4 text-sm text-slate-400">
               <li>
-                <Link to="/" className="hover:text-red-500 transition-colors">
+                <Link
+                  to="/about"
+                  className="hover:text-red-500 transition-colors"
+                >
                   About Us
                 </Link>
               </li>
@@ -120,7 +119,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* 4. Contact Info - Using Bold Red for Visibility */}
+          {/* 4. Contact Info */}
           <div>
             <h4 className="font-bold text-white uppercase tracking-wider text-sm mb-7">
               Get In Touch
@@ -129,9 +128,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-red-500 shrink-0" />
                 <span>
-                  1F. De Zafra St. Barangay Maysan,
-                  <br />
-                  Valenzuela City
+                  1F. De Zafra St. Barangay Maysan, <br /> Valenzuela City
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -147,19 +144,16 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
       <div className="bg-black/40 border-t border-white/5 py-6">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-slate-500 text-[11px] uppercase tracking-widest text-center">
-            © 2026 Kimwin Corporation. All rights reserved.
-          </p>
-          <div className="flex gap-6 text-[11px] uppercase tracking-widest text-slate-500">
-            <a href="#" className="hover:text-white transition-colors">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-[11px] uppercase tracking-widest">
+          <p>© 2026 Kimwin Corporation. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link to="#" className="hover:text-white transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
+            </Link>
+            <Link to="#" className="hover:text-white transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

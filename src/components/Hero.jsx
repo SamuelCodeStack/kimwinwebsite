@@ -34,7 +34,7 @@ export default function Hero() {
             variants={itemVariants}
             className="text-5xl md:text-7xl font-black text-white uppercase leading-tight max-w-3xl"
           >
-            Custom Packaging <span className="text-blue-400">Solutions</span>
+            Custom Packaging <span className="text-red-500">Solutions</span>
           </motion.h1>
 
           <motion.p
@@ -51,7 +51,7 @@ export default function Hero() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-blue-600 text-white px-10 py-5 rounded-lg font-black uppercase tracking-wider shadow-lg shadow-blue-500/20"
+              className="bg-red-600 text-white px-10 py-5 rounded-lg font-black uppercase tracking-wider shadow-lg shadow-red-500/20"
             >
               Start Your Project
             </motion.button>
