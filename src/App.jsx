@@ -6,14 +6,14 @@ import Gallery from "./components/Gallery";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AboutUs from "./components/AboutUs";
+import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import BackToTop from "./components/BackToTop";
-import NotFound from "./components/NotFound";
 
 function App() {
   return (
-    <Router>
-      {/* Reset scroll position on every navigation */}
+    /* CRITICAL: Added basename to match your GitHub Pages URL */
+    <Router basename="/landingpage">
       <ScrollToTop />
 
       <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
@@ -33,12 +33,12 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
+
+          {/* Catch-all for 404s */}
           <Route path="*" element={<NotFound />} />
         </Routes>
 
         <Footer />
-
-        {/* Floating action button */}
         <BackToTop />
       </div>
     </Router>
