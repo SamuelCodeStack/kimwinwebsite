@@ -52,10 +52,10 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* --- MAIN STORY SECTION --- */}
+      {/* --- MAIN STORY SECTION (NOW JUST STORY & PHOTO) --- */}
       <section className="py-24 max-w-7xl mx-auto px-6 md:px-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left Side: Historical Narrative & Resources */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Side: Historical Narrative */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -96,65 +96,126 @@ export default function AboutUs() {
               <p>
                 KIMWIN CORPORATION is globally expanding its full range of
                 products with a vision to supply the international market and
-                become a major player in the plastic manufacturing industry. We
-                have the experience and resources to satisfy practically every
-                customer requirement. In today’s competitive markets, we turn
-                sustainability into a successful business solution through our{" "}
-                <strong>scrap pelletizer</strong> technology, providing premium
-                quality at an affordable price.
+                become a major player in the plastic manufacturing industry.
               </p>
             </motion.div>
           </motion.div>
 
-          {/* Right Side: THE PHOTO & Strategy Card */}
-          <div className="space-y-12">
+          {/* Right Side: THE PHOTO */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="absolute -inset-4 bg-red-600/10 rounded-[3rem] rotate-3 -z-10"></div>
+            <div className="relative overflow-hidden rounded-[2.5rem] shadow-2xl aspect-square">
+              <img
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                alt="Kimwin Manufacturing Facility"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* --- EXPANDED STRATEGY SECTION (FULL WIDTH) --- */}
+      <section className="py-24 bg-blue-950 relative overflow-hidden">
+        <Globe className="absolute -right-20 -bottom-20 text-white/5 w-96 h-96 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+          <div className="grid lg:grid-cols-5 gap-12 items-center">
+            {/* Massive Title Side */}
+            <div className="lg:col-span-3">
+              <motion.h3
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="text-red-500 font-black uppercase tracking-[0.3em] text-sm mb-6"
+              >
+                Our Global Strategy
+              </motion.h3>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase leading-[0.9] mb-8"
+              >
+                CIRCLE THE <span className="text-red-600">CUSTOMER</span>
+                <br />
+                CIRCLE THE <span className="text-red-600 italic">GLOBE</span>
+              </motion.h2>
+            </div>
+
+            {/* Description Side */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
+              className="lg:col-span-2 space-y-6"
             >
-              <div className="absolute -inset-4 bg-red-600/10 rounded-[3rem] rotate-3 -z-10"></div>
-              <div className="absolute -inset-4 border-2 border-blue-600/20 rounded-[3rem] -rotate-2 -z-10"></div>
-
-              <div className="relative overflow-hidden rounded-[2.5rem] shadow-2xl aspect-video lg:aspect-square">
-                <img
-                  src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800"
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
-                  alt="Kimwin Manufacturing Facility"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-950/60 to-transparent"></div>
-                <div className="absolute bottom-8 left-8 right-8 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 text-center">
-                  <p className="text-white font-bold italic">
-                    "Solving challenges through innovation and global reach."
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Strategy Spotlight Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-blue-900 text-white p-8 rounded-[2.5rem] shadow-xl relative overflow-hidden group"
-            >
-              <Globe className="absolute -right-4 -bottom-4 text-white/10 w-32 h-32 group-hover:scale-110 transition-transform duration-700" />
-              <h3 className="text-red-500 font-black uppercase tracking-widest text-sm mb-4">
-                Our Strategy
-              </h3>
-              <h4 className="text-2xl font-black mb-4 uppercase">
-                CIRCLE THE CUSTOMER{" "}
-                <span className="text-red-500 italic">CIRCLE THE GLOBE</span>
-              </h4>
-              <p className="text-blue-100 leading-relaxed relative z-10">
+              <div className="h-2 w-24 bg-red-600 rounded-full mb-6"></div>
+              <p className="text-blue-100/80 text-xl md:text-2xl leading-relaxed font-medium">
                 We solve customer challenges by adding new products, equipment,
                 and services to meet broadening requirements with precision
                 around the world.
               </p>
+              <div className="flex items-center gap-4 pt-4">
+                <div className="h-12 w-12 rounded-full border border-white/20 flex items-center justify-center text-red-500">
+                  <ArrowRight size={24} />
+                </div>
+                <span className="text-white font-bold uppercase tracking-widest text-xs">
+                  Innovation in Every Market
+                </span>
+              </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* --- MISSION & VISION SECTION --- */}
+      <section className="py-24 max-w-7xl mx-auto px-6 md:px-10">
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+          {/* MISSION CARD */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="p-12 md:p-16 rounded-[3rem] bg-gray-50 dark:bg-slate-900 border-4 border-transparent hover:border-red-600 transition-all duration-500 shadow-xl"
+          >
+            <h2 className="text-4xl md:text-5xl font-black text-blue-950 dark:text-white uppercase leading-tight mb-8 tracking-tighter">
+              OUR <span className="text-red-600">MISSION</span>
+            </h2>
+            <p className="text-gray-600 dark:text-slate-400 text-lg md:text-xl leading-relaxed font-medium">
+              To provide sustainable and customized packaging solutions that
+              empower brands. We are driven to meet the satisfying requirements
+              of our clients through precision manufacturing, affordable
+              quality, and a commitment to "Circle the Customer" with
+              responsive, future-ready services.
+            </p>
+          </motion.div>
+
+          {/* VISION CARD */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="p-12 md:p-16 rounded-[3rem] bg-blue-950 text-white border-4 border-transparent hover:border-red-600 transition-all duration-500 shadow-xl"
+          >
+            <h2 className="text-4xl md:text-5xl font-black uppercase leading-tight mb-8 tracking-tighter">
+              OUR <span className="text-red-600">VISION</span>
+            </h2>
+            <p className="text-blue-100/80 text-lg md:text-xl leading-relaxed font-medium">
+              To become a premier global force in the plastic and packaging
+              industry. Our vision is to "Circle the Globe," expanding our reach
+              to every corner of the international market while maintaining the
+              local integrity and innovation that has defined Kimwin Corporation
+              since 1983.
+            </p>
+          </motion.div>
         </div>
       </section>
 

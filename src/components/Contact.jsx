@@ -1,8 +1,107 @@
-import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Loader2,
+  CheckCircle2,
+  AlertCircle,
+  Paperclip,
+  ChevronDown,
+} from "lucide-react";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import KCLogo from "../assets/kc-logo.png";
 
 export default function Contact() {
+  const form = useRef();
+  const [status, setStatus] = useState("idle");
+
+  const sendEmail = async (e) => {
+    e.preventDefault();
+
+    const fileInput = form.current.querySelector('input[type="file"]');
+    const file = fileInput.files[0];
+
+    // --- FILE TYPE VALIDATION ---
+    if (file) {
+      const allowedTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "application/pdf",
+      ];
+      if (!allowedTypes.includes(file.type)) {
+        alert("Invalid file type. Please upload only JPEG, PNG, or PDF files.");
+        return;
+      }
+    }
+
+    setStatus("sending");
+    let attachmentUrl = ""; // Reset to empty for conditional EmailJS logic
+
+    if (file) {
+      const cloudData = new FormData();
+      cloudData.append("file", file);
+      cloudData.append("upload_preset", "Kimwin Corporation");
+
+      try {
+        const uploadRes = await fetch(
+          "https://api.cloudinary.com/v1_1/dvsluqcud/upload",
+          {
+            method: "POST",
+            body: cloudData,
+          },
+        );
+        const data = await uploadRes.json();
+        attachmentUrl = data.secure_url;
+      } catch (err) {
+        console.error("Cloudinary Upload Failed:", err);
+      }
+    }
+
+    const templateParams = {
+      from_name: form.current.from_name.value,
+      reply_to: form.current.reply_to.value,
+      subject: form.current.subject.value,
+      message: form.current.message.value,
+      attachment_link: attachmentUrl,
+    };
+
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
+    emailjs
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      )
+      .then(
+        (result) => {
+          console.log("Success:", result.text);
+          setStatus("success");
+
+          // --- RESET LOGIC ---
+          form.current.reset();
+
+          // Reset the Paperclip label text manually
+          const fileLabel =
+            form.current.querySelector('input[type="file"]').previousSibling;
+          if (fileLabel)
+            fileLabel.innerText = "Add Attachment (JPG, PNG, PDF - Max 10MB)";
+
+          setTimeout(() => setStatus("idle"), 5000);
+        },
+        (error) => {
+          console.error("EmailJS Error:", error);
+          setStatus("error");
+          setTimeout(() => setStatus("idle"), 4000);
+        },
+      );
+  };
+
   const mapUrl =
     "https://www.google.com/maps?q=14.703167,120.969083&hl=es;z=14&output=embed";
 
@@ -22,7 +121,6 @@ export default function Contact() {
 
   return (
     <div className="bg-white dark:bg-slate-950 transition-colors">
-      {/* --- HERO BANNER SECTION --- */}
       <section className="relative py-24 bg-blue-900 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-10 flex items-center justify-center pointer-events-none">
           <img
@@ -51,7 +149,6 @@ export default function Contact() {
 
       <section id="contact" className="py-24 px-6 md:px-10 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
-          {/* Map Side */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -67,7 +164,6 @@ export default function Contact() {
             ></iframe>
           </motion.div>
 
-          {/* Info & Form Side */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -109,47 +205,156 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Form Section */}
             <motion.div
               variants={itemVariants}
               className="bg-gray-50 dark:bg-slate-900 p-8 rounded-3xl shadow-xl border border-gray-100 dark:border-slate-800 grow"
             >
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form ref={form} className="space-y-4" onSubmit={sendEmail}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input
+                    name="from_name"
+                    required
                     type="text"
                     placeholder="Full Name"
                     className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 focus:ring-2 focus:ring-red-500 outline-none transition-all dark:text-white"
                   />
                   <input
+                    name="reply_to"
+                    required
                     type="email"
                     placeholder="Email Address"
                     className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 focus:ring-2 focus:ring-red-500 outline-none transition-all dark:text-white"
                   />
                 </div>
+
+                <div className="relative group">
+                  <select
+                    name="subject"
+                    required
+                    defaultValue=""
+                    className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 focus:ring-2 focus:ring-red-500 outline-none transition-all dark:text-white appearance-none cursor-pointer"
+                  >
+                    <option value="" disabled>
+                      How can we help?
+                    </option>
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Custom Packaging Request">
+                      Custom Packaging Request
+                    </option>
+                    <option value="Bulk Order Inquiry">
+                      Bulk Order Inquiry
+                    </option>
+                    <option value="Career Application">
+                      Career Application
+                    </option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <ChevronDown
+                    className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 group-focus-within:text-red-500 transition-colors"
+                    size={20}
+                  />
+                </div>
+
                 <textarea
+                  name="message"
+                  required
                   rows="4"
                   placeholder="Tell us about your project..."
                   className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 focus:ring-2 focus:ring-red-500 outline-none transition-all resize-none dark:text-white"
                 ></textarea>
 
-                {/* --- DYNAMIC THEME BUTTON --- */}
+                <div className="relative">
+                  <label className="flex items-center gap-3 w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border-2 border-dashed border-gray-200 dark:border-slate-700 hover:border-red-500 dark:hover:border-red-500 transition-all cursor-pointer group">
+                    <Paperclip
+                      className="text-gray-400 group-hover:text-red-500"
+                      size={20}
+                    />
+                    <span className="text-gray-400 group-hover:text-red-500 text-sm font-medium italic">
+                      Add Attachment (JPG, PNG, PDF - Max 10MB)
+                    </span>
+                    <input
+                      type="file"
+                      name="my_file"
+                      className="hidden"
+                      accept=".jpg, .jpeg, .png, .pdf"
+                      onChange={(e) => {
+                        const fileName = e.target.files[0]?.name;
+                        if (fileName)
+                          e.target.previousSibling.innerText = fileName;
+                      }}
+                    />
+                  </label>
+                </div>
+
                 <motion.button
+                  disabled={status === "sending" || status === "success"}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-3 transition-all duration-500 group shadow-lg
-                    /* LIGHT MODE: Blue bg, Red text hover */
-                    bg-blue-900 text-white hover:shadow-red-500/20
-                    /* DARK MODE: Red bg, Blue text hover */
-                    dark:bg-red-600 dark:text-white dark:hover:bg-red-700 dark:hover:shadow-blue-500/40"
+                  type="submit"
+                  className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-3 transition-all duration-500 group shadow-lg disabled:opacity-70 disabled:cursor-not-allowed
+                    ${
+                      status === "success"
+                        ? "bg-green-600 text-white"
+                        : status === "error"
+                          ? "bg-red-800 text-white"
+                          : "bg-blue-900 text-white dark:bg-red-600 hover:shadow-red-500/20 dark:hover:shadow-blue-500/40"
+                    }`}
                 >
-                  <span className="group-hover:text-red-500 dark:group-hover:text-blue-200 transition-colors">
-                    Send Message
-                  </span>
-                  <Send
-                    size={20}
-                    className="group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-red-500 dark:group-hover:text-blue-200 transition-all"
-                  />
+                  <AnimatePresence mode="wait">
+                    {status === "idle" && (
+                      <motion.div
+                        key="idle"
+                        className="flex items-center gap-3"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                      >
+                        <span className="group-hover:text-red-500 dark:group-hover:text-blue-200 transition-colors">
+                          Send Message
+                        </span>
+                        <Send
+                          size={20}
+                          className="group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-red-500 dark:group-hover:text-blue-200 transition-all"
+                        />
+                      </motion.div>
+                    )}
+
+                    {status === "sending" && (
+                      <motion.div
+                        key="sending"
+                        className="flex items-center gap-3"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                      >
+                        <span>Processing...</span>
+                        <Loader2 size={20} className="animate-spin" />
+                      </motion.div>
+                    )}
+
+                    {status === "success" && (
+                      <motion.div
+                        key="success"
+                        className="flex items-center gap-3"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                      >
+                        <span>Message Sent!</span>
+                        <CheckCircle2 size={20} />
+                      </motion.div>
+                    )}
+
+                    {status === "error" && (
+                      <motion.div
+                        key="error"
+                        className="flex items-center gap-3"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                      >
+                        <span>Error Occurred</span>
+                        <AlertCircle size={20} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.button>
               </form>
             </motion.div>

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
@@ -12,8 +12,8 @@ import NotFound from "./components/NotFound";
 
 function App() {
   return (
-    <Router basename="/kimwinwebsite">
-      {/* Reset scroll position on every navigation */}
+    /* Using HashRouter instead of BrowserRouter to fix 404 on refresh */
+    <Router>
       <ScrollToTop />
 
       <div className="min-h-screen bg-white dark:bg-slate-950 transition-colors">
@@ -33,12 +33,12 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
+
+          {/* Catch-all for 404s */}
           <Route path="*" element={<NotFound />} />
         </Routes>
 
         <Footer />
-
-        {/* Floating action button */}
         <BackToTop />
       </div>
     </Router>
