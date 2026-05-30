@@ -7,12 +7,11 @@ import {
   Loader2,
   CheckCircle2,
   AlertCircle,
-  Paperclip,
   ChevronDown,
 } from "lucide-react";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import KCLogo from "../assets/kc-logo.png";
+import KCCustomerS from "../assets/KimwinCustomerService.png";
 
 export default function Contact() {
   const form = useRef();
@@ -20,78 +19,21 @@ export default function Contact() {
 
   const sendEmail = async (e) => {
     e.preventDefault();
-
-    const fileInput = form.current.querySelector('input[type="file"]');
-    const file = fileInput.files[0];
-
-    // --- FILE TYPE VALIDATION ---
-    if (file) {
-      const allowedTypes = [
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "application/pdf",
-      ];
-      if (!allowedTypes.includes(file.type)) {
-        alert("Invalid file type. Please upload only JPEG, PNG, or PDF files.");
-        return;
-      }
-    }
-
     setStatus("sending");
-    let attachmentUrl = ""; // Reset to empty for conditional EmailJS logic
 
-    if (file) {
-      const cloudData = new FormData();
-      cloudData.append("file", file);
-      cloudData.append("upload_preset", "Kimwin Corporation");
-
-      try {
-        const uploadRes = await fetch(
-          "https://api.cloudinary.com/v1_1/dvsluqcud/upload",
-          {
-            method: "POST",
-            body: cloudData,
-          },
-        );
-        const data = await uploadRes.json();
-        attachmentUrl = data.secure_url;
-      } catch (err) {
-        console.error("Cloudinary Upload Failed:", err);
-      }
-    }
-
-    const templateParams = {
-      from_name: form.current.from_name.value,
-      reply_to: form.current.reply_to.value,
-      subject: form.current.subject.value,
-      message: form.current.message.value,
-      attachment_link: attachmentUrl,
-    };
-
-    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
-
+    // Ensure you use sendForm when passing form.current
     emailjs
-      .send(
+      .sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        templateParams,
+        form.current, // Pass the actual form DOM element
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       )
       .then(
         (result) => {
           console.log("Success:", result.text);
           setStatus("success");
-
-          // --- RESET LOGIC ---
           form.current.reset();
-
-          // Reset the Paperclip label text manually
-          const fileLabel =
-            form.current.querySelector('input[type="file"]').previousSibling;
-          if (fileLabel)
-            fileLabel.innerText = "Add Attachment (JPG, PNG, PDF - Max 10MB)";
-
           setTimeout(() => setStatus("idle"), 5000);
         },
         (error) => {
@@ -121,32 +63,93 @@ export default function Contact() {
 
   return (
     <div className="bg-white dark:bg-slate-950 transition-colors">
-      <section className="relative py-24 bg-blue-900 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 opacity-10 flex items-center justify-center pointer-events-none">
-          <img
-            src={KCLogo}
-            alt=""
-            className="w-full h-full object-contain scale-110 brightness-0 invert"
+      {/* --- HERO SECTION --- */}
+      <section className="relative min-h-[60vh] lg:h-[70vh] flex items-center overflow-hidden bg-slate-950 py-12 lg:py-0">
+        <div className="absolute inset-0 z-0">
+          <motion.img
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.5 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            src={KCCustomerS}
+            alt="Customer Support"
+            className="w-full h-full object-cover"
           />
+          <div className="absolute inset-0 bg-slate-950/80 lg:bg-slate-950/70 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-red-500 font-black uppercase text-sm mb-4 tracking-[0.3em]"
-          >
-            Get in Touch
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black text-white uppercase"
-          >
-            CONTACT <span className="text-red-500">EXPERTS</span>
-          </motion.h1>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-10 w-full relative z-20">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+            <div className="space-y-6 text-center lg:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 lg:mb-6">
+                  <div className="w-6 lg:w-8 h-[2px] bg-red-600" />
+                  <span className="text-red-500 font-bold uppercase text-[9px] lg:text-[10px] tracking-[0.3em] lg:tracking-[0.4em]">
+                    Contact Infrastructure
+                  </span>
+                </div>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white uppercase leading-none tracking-tight">
+                  GET IN <br className="hidden sm:block" />
+                  <span className="text-red-600">TOUCH.</span>
+                </h1>
+                <p className="text-slate-400 text-base lg:text-lg mt-6 max-w-md mx-auto lg:mx-0 font-medium leading-relaxed">
+                  Connect with our technical sales team for specialized
+                  logistics and custom packaging solutions.
+                </p>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="bg-white/5 border border-white/10 backdrop-blur-md p-6 lg:p-10 rounded-2xl space-y-6 lg:space-y-8"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+                <div>
+                  <p className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-red-500 mb-2">
+                    HQ Location
+                  </p>
+                  <p className="text-white font-bold text-base lg:text-lg leading-tight">
+                    Valenzuela City, <br /> Philippines
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-red-500 mb-2">
+                    Availability
+                  </p>
+                  <p className="text-white font-bold text-base lg:text-lg leading-tight">
+                    Mon — Sat <br /> 08:00 - 18:00
+                  </p>
+                </div>
+              </div>
+              <div className="pt-6 border-t border-white/10">
+                <p className="text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-3">
+                  Authorized Technical Scope
+                </p>
+                <div className="flex flex-wrap gap-2 lg:gap-3">
+                  {["Custom Tooling", "Bulk Supply", "QC Testing"].map(
+                    (tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] lg:text-[10px] font-bold border border-white/20 px-2 lg:px-3 py-1 text-slate-300 uppercase tracking-wider rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ),
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
+      {/* --- FORM & MAP SECTION --- */}
       <section id="contact" className="py-24 px-6 md:px-10 overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           <motion.div
@@ -171,7 +174,7 @@ export default function Contact() {
             viewport={{ once: true }}
             className="flex flex-col gap-8"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
               {[
                 {
                   icon: <MapPin />,
@@ -188,17 +191,24 @@ export default function Contact() {
                   title: "Email Us",
                   detail: "kimwinsales@gmail.com",
                 },
+                {
+                  icon: <Send />,
+                  title: "Careers",
+                  detail: "kimwinhr@gmail.com",
+                },
               ].map((card, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
-                  className={`bg-gray-50 dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 hover:border-red-500 transition-colors ${i === 0 ? "sm:col-span-2 lg:col-span-1" : ""}`}
+                  // Removed the conditional 'sm:col-span-2' to keep all cards equal size
+                  className="bg-gray-50 dark:bg-slate-900 p-6 rounded-2xl border border-gray-100 dark:border-slate-800 hover:border-red-500 transition-colors flex flex-col h-full"
                 >
                   <div className="text-red-600 mb-3">{card.icon}</div>
                   <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
                     {card.title}
                   </p>
-                  <p className="text-sm font-semibold text-blue-900 dark:text-white">
+                  {/* Added break-words to handle long emails on small screens */}
+                  <p className="text-sm font-semibold text-blue-900 dark:text-white break-words mt-1">
                     {card.detail}
                   </p>
                 </motion.div>
@@ -244,9 +254,6 @@ export default function Contact() {
                     <option value="Bulk Order Inquiry">
                       Bulk Order Inquiry
                     </option>
-                    <option value="Career Application">
-                      Career Application
-                    </option>
                     <option value="Other">Other</option>
                   </select>
                   <ChevronDown
@@ -263,42 +270,13 @@ export default function Contact() {
                   className="w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border dark:border-slate-700 focus:ring-2 focus:ring-red-500 outline-none transition-all resize-none dark:text-white"
                 ></textarea>
 
-                <div className="relative">
-                  <label className="flex items-center gap-3 w-full px-5 py-4 rounded-xl bg-white dark:bg-slate-800 border-2 border-dashed border-gray-200 dark:border-slate-700 hover:border-red-500 dark:hover:border-red-500 transition-all cursor-pointer group">
-                    <Paperclip
-                      className="text-gray-400 group-hover:text-red-500"
-                      size={20}
-                    />
-                    <span className="text-gray-400 group-hover:text-red-500 text-sm font-medium italic">
-                      Add Attachment (JPG, PNG, PDF - Max 10MB)
-                    </span>
-                    <input
-                      type="file"
-                      name="my_file"
-                      className="hidden"
-                      accept=".jpg, .jpeg, .png, .pdf"
-                      onChange={(e) => {
-                        const fileName = e.target.files[0]?.name;
-                        if (fileName)
-                          e.target.previousSibling.innerText = fileName;
-                      }}
-                    />
-                  </label>
-                </div>
-
                 <motion.button
                   disabled={status === "sending" || status === "success"}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
                   className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-3 transition-all duration-500 group shadow-lg disabled:opacity-70 disabled:cursor-not-allowed
-                    ${
-                      status === "success"
-                        ? "bg-green-600 text-white"
-                        : status === "error"
-                          ? "bg-red-800 text-white"
-                          : "bg-blue-900 text-white dark:bg-red-600 hover:shadow-red-500/20 dark:hover:shadow-blue-500/40"
-                    }`}
+                    ${status === "success" ? "bg-green-600 text-white" : status === "error" ? "bg-red-800 text-white" : "bg-blue-900 text-white dark:bg-red-600 hover:shadow-red-500/20 dark:hover:shadow-blue-500/40"}`}
                 >
                   <AnimatePresence mode="wait">
                     {status === "idle" && (
@@ -318,7 +296,6 @@ export default function Contact() {
                         />
                       </motion.div>
                     )}
-
                     {status === "sending" && (
                       <motion.div
                         key="sending"
@@ -330,7 +307,6 @@ export default function Contact() {
                         <Loader2 size={20} className="animate-spin" />
                       </motion.div>
                     )}
-
                     {status === "success" && (
                       <motion.div
                         key="success"
@@ -342,7 +318,6 @@ export default function Contact() {
                         <CheckCircle2 size={20} />
                       </motion.div>
                     )}
-
                     {status === "error" && (
                       <motion.div
                         key="error"

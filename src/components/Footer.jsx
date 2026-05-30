@@ -1,9 +1,15 @@
 import { Facebook, Mail, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react"; // Added for Modal state
 import KCLogo from "../assets/kc-logo.png";
 import ShopeeBrandedLogo from "../assets/shopee.svg";
+import LegalModal from "./LegalModal.jsx"; // Make sure to create this file
 
 export default function Footer() {
+  // --- ADDED STATE FOR MODALS ---
+
+  const [modalType, setModalType] = useState(null);
+
   return (
     <footer className="bg-slate-950 text-white transition-colors">
       <div className="max-w-7xl mx-auto px-6 md:px-10 pt-32 pb-16">
@@ -102,10 +108,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/gallery"
+                  to="/products"
                   className="hover:text-red-500 transition-colors"
                 >
-                  Gallery
+                  Our Work
                 </Link>
               </li>
               <li>
@@ -113,7 +119,7 @@ export default function Footer() {
                   to="/contact"
                   className="hover:text-red-500 transition-colors"
                 >
-                  Contact Support
+                  Contact Us
                 </Link>
               </li>
             </ul>
@@ -135,6 +141,7 @@ export default function Footer() {
                 <Phone size={18} className="text-red-500 shrink-0" />
                 <span>(02) 8277-0030 / 8277-0036</span>
               </li>
+
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-red-500 shrink-0" />
                 <span>kimwinsales@gmail.com</span>
@@ -148,15 +155,29 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 md:px-10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-[11px] uppercase tracking-widest">
           <p>© 2026 Kimwin Corporation. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link to="#" className="hover:text-white transition-colors">
+            {/* UPDATED TO BUTTONS FOR MODAL LOGIC */}
+            <button
+              onClick={() => setModalType("privacy")}
+              className="hover:text-white transition-colors uppercase"
+            >
               Privacy Policy
-            </Link>
-            <Link to="#" className="hover:text-white transition-colors">
+            </button>
+            <button
+              onClick={() => setModalType("terms")}
+              className="hover:text-white transition-colors uppercase"
+            >
               Terms of Service
-            </Link>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* --- RENDER THE LEGAL MODAL --- */}
+      <LegalModal
+        type={modalType}
+        isOpen={!!modalType}
+        onClose={() => setModalType(null)}
+      />
     </footer>
   );
 }

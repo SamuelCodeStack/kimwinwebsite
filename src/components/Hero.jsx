@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
 import WarehouseImg from "../assets/Kimwinwarehouse.png";
 
 export default function Hero() {
+  const navigate = useNavigate(); // 2. Initialize the navigate function
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
@@ -48,7 +51,9 @@ export default function Hero() {
             variants={itemVariants}
             className="mt-10 flex flex-wrap gap-4"
           >
+            {/* 3. Added navigate to /contact */}
             <motion.button
+              onClick={() => navigate("/contact")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-red-600 text-white px-10 py-5 rounded-lg font-black uppercase tracking-wider shadow-lg shadow-red-500/20"
@@ -56,7 +61,9 @@ export default function Hero() {
               Start Your Project
             </motion.button>
 
+            {/* 4. Added navigate to /about */}
             <motion.button
+              onClick={() => navigate("/products")}
               whileHover={{
                 scale: 1.05,
                 backgroundColor: "rgba(255,255,255,0.1)",
