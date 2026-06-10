@@ -3,6 +3,7 @@ import { ArrowRight, Heart, Zap, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import KCFactory from "../assets/KimwinFactory.png";
 import KCPlasticD from "../assets/KimwinFacroty2.png";
+import KimwinProfile from "../assets/PDF/KIMWIN_CORPORATION_COMPANY_PROFILE.pdf";
 
 export default function AboutUs() {
   const containerVariants = {
@@ -97,7 +98,6 @@ export default function AboutUs() {
               className="w-full lg:w-5/12 bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-2xl shadow-2xl"
             >
               <div className="space-y-8 text-blue-50/90 text-lg leading-relaxed font-light">
-                {/* Text remains exactly as provided */}
                 <p>
                   Our Company was founded in{" "}
                   <span className="text-white font-bold">1983</span> as a single
@@ -153,22 +153,20 @@ export default function AboutUs() {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
-            {/* LEFT COLUMN: The Large Floating Glass Panel & Metrics (Moved from Right) */}
+            {/* LEFT COLUMN */}
             <div className="lg:col-span-7 space-y-8 lg:pr-6">
               <motion.div
-                initial={{ opacity: 0, x: -50 }} // Changed to slide from left
+                initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 60, damping: 15 }}
                 className="bg-slate-50/50 dark:bg-white/[0.03] backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-slate-200 dark:border-white/[0.08] shadow-2xl relative overflow-hidden"
               >
-                {/* Subtle Lettering Watermarks */}
                 <span className="absolute -bottom-10 -left-6 text-[18rem] font-black text-slate-900/[0.02] dark:text-white/[0.01] select-none pointer-events-none">
                   MV
                 </span>
 
                 <div className="space-y-10 relative z-10">
-                  {/* Section 1: Mission Block */}
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-mono text-red-600 dark:text-red-500">
@@ -188,10 +186,8 @@ export default function AboutUs() {
                     </p>
                   </div>
 
-                  {/* Decorative Divider Line */}
                   <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-200 dark:via-white/10 to-transparent" />
 
-                  {/* Section 2: Vision Block */}
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-mono text-red-600 dark:text-red-500">
@@ -209,7 +205,6 @@ export default function AboutUs() {
                   </div>
                 </div>
 
-                {/* Bottom Card Tech Badges */}
                 <div className="mt-10 pt-8 border-t border-slate-200 dark:border-white/[0.06] flex gap-6">
                   <div className="flex items-center gap-2">
                     <div className="h-1.5 w-1.5 bg-red-600 dark:bg-red-500 rounded-full" />
@@ -227,17 +222,14 @@ export default function AboutUs() {
               </motion.div>
             </div>
 
-            {/* RIGHT COLUMN: The Bold Typographic Anchors (Moved from Left) */}
-
+            {/* RIGHT COLUMN */}
             <div className="lg:col-span-5 space-y-12 order-2 lg:order-1">
-              {/* Header Tag */}
               <div className="inline-block border border-red-500/30 bg-red-50 dark:bg-red-950/20 px-4 py-1.5 rounded-sm">
                 <span className="text-red-600 dark:text-red-500 font-black uppercase tracking-[0.3em] text-[10px]">
                   Strategic Framework
                 </span>
               </div>
 
-              {/* Massive Typography */}
               <h2 className="text-5xl md:text-7xl font-black leading-[0.95] uppercase tracking-tighter text-blue-950 dark:text-white">
                 MISSION <br />
                 <span className="text-red-600 dark:text-red-500 italic">
@@ -248,7 +240,6 @@ export default function AboutUs() {
                 <span className="text-red-600 dark:text-red-500">FORWARD.</span>
               </h2>
 
-              {/* Bottom Left: Operational Advantage Callout */}
               <div className="p-8 bg-slate-50 dark:bg-slate-950/60 rounded-2xl border-l-4 border-red-600 shadow-xl lg:shadow-none dark:shadow-2xl max-w-md border border-slate-200 dark:border-white/5">
                 <span className="text-red-600 dark:text-red-500 font-black uppercase tracking-widest text-[11px] mb-2 block">
                   Operational Advantage
@@ -266,7 +257,6 @@ export default function AboutUs() {
 
       {/* --- STRATEGY & CAPABILITIES: INDUSTRIAL GRID --- */}
       <section className="relative py-24 lg:py-40 bg-slate-950 overflow-hidden">
-        {/* Background Visual: Subtle Texture & Image */}
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <img
             src={KCPlasticD}
@@ -278,9 +268,7 @@ export default function AboutUs() {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-12 gap-8 items-center">
-            {/* RIGHT: Detailed Narrative (7 Columns) */}
             <div className="lg:col-span-7 relative">
-              {/* Technical Grid Overlay Decoration */}
               <div className="absolute -top-12 -right-12 w-64 h-64 border border-white/5 grid grid-cols-4 grid-rows-4 opacity-20 hidden lg:grid">
                 {[...Array(16)].map((_, i) => (
                   <div key={i} className="border-[0.5px] border-white/10" />
@@ -295,7 +283,7 @@ export default function AboutUs() {
               >
                 <div className="space-y-8">
                   <p className="text-blue-100/90 text-xl leading-relaxed italic font-light">
-                    "A clearly defined strategy guides our company’s daily
+                    "A clearly defined strategy guides our company's daily
                     action, called –{" "}
                     <span className="text-white font-bold not-italic">
                       Circle the Customer Circle the Globe
@@ -311,8 +299,8 @@ export default function AboutUs() {
                     </p>
                     <p>
                       Our Company also has the experience and the resources to
-                      satisfy practically every customer’s requirements. In
-                      today’s competitive markets, it is important to provide
+                      satisfy practically every customer's requirements. In
+                      today's competitive markets, it is important to provide
                       good quality in an affordable price.
                     </p>
                   </div>
@@ -334,7 +322,7 @@ export default function AboutUs() {
                 </div>
               </motion.div>
             </div>
-            {/* LEFT: Branding & Headline (5 Columns) */}
+
             <div className="lg:col-span-5 space-y-10">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -353,7 +341,6 @@ export default function AboutUs() {
                 CIRCLE THE <span className="text-red-600 italic">GLOBE.</span>
               </h2>
 
-              {/* Unique Pelletizer Feature Card */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="p-6 bg-blue-950/40 border-l-4 border-red-600 backdrop-blur-md rounded-r-xl"
@@ -374,7 +361,6 @@ export default function AboutUs() {
       {/* --- VALUES & MISSION: UNIFIED EDITORIAL LAYOUT --- */}
       <section className="py-40 bg-white dark:bg-slate-950 overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          {/* Header Section */}
           <div className="space-y-8 mb-24">
             <div className="flex justify-center items-center gap-4">
               <div className="h-px w-12 bg-red-600" />
@@ -390,7 +376,6 @@ export default function AboutUs() {
             </h2>
           </div>
 
-          {/* The Unified Values Stream */}
           <div className="space-y-16 relative">
             <div className="max-w-3xl mx-auto">
               <p className="text-xl md:text-2xl text-blue-900/80 dark:text-slate-300 leading-relaxed font-medium">
@@ -401,7 +386,6 @@ export default function AboutUs() {
               </p>
             </div>
 
-            {/* Values Display: Large, Spaced, and Centered */}
             <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 py-12 border-y-2 border-slate-100 dark:border-slate-900">
               {[
                 "Spirit",
@@ -421,7 +405,6 @@ export default function AboutUs() {
             </div>
           </div>
 
-          {/* Secondary Narrative Section */}
           <div className="mt-24 grid md:grid-cols-2 gap-16 items-start text-left">
             <div className="space-y-6 md:border-r border-slate-100 dark:border-slate-800 md:pr-16">
               <h3 className="text-2xl font-black text-blue-950 dark:text-white uppercase tracking-tight">
@@ -442,6 +425,156 @@ export default function AboutUs() {
                 </p>
               </blockquote>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- COMPANY PROFILE PDF --- */}
+      <section className="py-24 bg-slate-950 overflow-hidden relative">
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* LEFT: Headline */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="space-y-6"
+            >
+              <div className="flex items-center gap-4">
+                <div className="h-[2px] w-10 bg-red-600" />
+                <span className="text-red-600 font-black uppercase tracking-[0.4em] text-xs">
+                  Company Profile
+                </span>
+              </div>
+              <h2 className="text-5xl md:text-7xl font-black text-white leading-none uppercase tracking-tighter">
+                EXPLORE <br />
+                <span className="text-red-600 italic">EVERYTHING</span> <br />
+                WE OFFER.
+              </h2>
+              <p className="text-slate-400 text-lg leading-relaxed max-w-md">
+                Our full company profile includes our complete product catalog —
+                paper, plastic, straws, and more — with specifications and
+                packaging details.
+              </p>
+            </motion.div>
+
+            {/* RIGHT: PDF Preview Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="relative"
+            >
+              <div className="absolute -top-3 -right-3 w-16 h-16 border-t-2 border-r-2 border-red-600/40 z-20" />
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+                {/* PDF card header */}
+                <div className="bg-[#1a2744] px-8 py-6 flex items-center justify-between border-b border-white/5">
+                  <div className="flex items-center gap-3">
+                    <div className="flex gap-1">
+                      <div className="w-8 h-8 bg-[#1e3a8a] rounded-md flex items-center justify-center">
+                        <span className="text-white font-black text-sm">K</span>
+                      </div>
+                      <div className="w-8 h-8 bg-[#1e3a8a] rounded-md flex items-center justify-center">
+                        <span className="text-white font-black text-sm">C</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-white font-black text-sm uppercase tracking-widest">
+                        KIMWIN
+                      </p>
+                      <p className="text-slate-400 text-[10px] uppercase tracking-widest">
+                        CORPORATION
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest border border-white/10 px-3 py-1 rounded-full">
+                    2026 Edition
+                  </span>
+                </div>
+
+                {/* Contents preview */}
+                <div className="p-8 space-y-1">
+                  {[
+                    { label: "Company Overview & History", tag: "Profile" },
+                    { label: "Mission, Vision & Core Values", tag: "Culture" },
+                    { label: "Paper Products Catalog", tag: "Products" },
+                    { label: "Plastic Products Catalog", tag: "Products" },
+                    { label: "Drinking Straw Products", tag: "Products" },
+                    { label: "Other Products & Packaging", tag: "Products" },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center justify-between py-3 border-b border-white/5 last:border-0"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-red-600 font-black text-xs w-5 text-right">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-slate-300 text-sm font-medium">
+                          {item.label}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                        {item.tag}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Action buttons */}
+                <div className="px-8 pb-8 flex flex-col sm:flex-row gap-3">
+                  <a
+                    href={KimwinProfile}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-black uppercase tracking-widest text-xs py-4 rounded-xl transition-colors"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    View PDF
+                  </a>
+                  <a
+                    href={KimwinProfile}
+                    download="KIMWIN_CORPORATION_COMPANY_PROFILE.pdf"
+                    className="flex-1 flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-black uppercase tracking-widest text-xs py-4 rounded-xl transition-colors"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                      <polyline points="7 10 12 15 17 10" />
+                      <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Download
+                  </a>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

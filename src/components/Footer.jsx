@@ -38,23 +38,12 @@ export default function Footer() {
 
             <div className="flex gap-6 items-center">
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61587278555640"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white hover:text-blue-400 transition-all hover:scale-110"
               >
                 <Facebook size={28} />
-              </a>
-              <a
-                href="https://shopee.ph/your-shop-url"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-transform hover:scale-110 group"
-                title="Visit our Shopee Store"
-              >
-                <img
-                  src={ShopeeBrandedLogo}
-                  alt="Shopee Store"
-                  className="w-10 h-10 object-contain rounded-lg shadow-lg border border-white/10 group-hover:border-red-500 transition-all"
-                />
               </a>
             </div>
           </div>
